@@ -17,11 +17,11 @@
     </a>
     <div class="nav-right">
       <ul class="nav-links" id="navLinks">
-        <li><a data-section="services" href="404.html">Products</a></li>
-        <li><a data-section="about" href="404.html">About Us</a></li>
-        <li><a data-section="contact">Contact</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a data-section="about" href="about.html">About Us</a></li>
+        <li><a data-section="contact" href="contact.html">Contact</a></li>
         <li><a data-section="blog" href="404.html">Blog</a></li>
-        <li><a href="#contact" class="nav-cta">Get Started</a></li>
+        <li><a href="contact.html" class="nav-cta">Get Started</a></li>
       </ul>
       <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
       <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -32,11 +32,11 @@
 
   <!-- MOBILE DROPDOWN -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="404.html">Products</a>
-    <a href="404.html">About Us</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
     <a href="404.html">Blog</a>
-    <a href="#contact" class="mobile-cta">Get Started</a>
+    <a href="contact.html" class="mobile-cta">Get Started</a>
   </div>
 
   <!-- HERO (50/50 split) -->
@@ -52,12 +52,8 @@
       </div>
     </div>
     <!-- Right: image placeholder -->
-    <div class="hero-image">
-      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1">
-        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-        <polyline points="21 15 16 10 5 21"/>
-      </svg>
-      <p>Image Placeholder — 800 × 520px</p>
+    <div class="hero-image" id="bubblePanel">
+      <canvas id="bubbleCanvas"></canvas>
     </div>
   </div>
 
@@ -65,47 +61,53 @@
   <section class="services" id="services">
     <div class="services-header">
       <div class="section-label">What We Offer</div>
-      <div class="section-title">Our Services &amp; Products</div>
-      <p class="section-sub">Scroll through to explore everything we have available for you.</p>
+      <div class="section-title">Our Services</div>
+      <p class="section-sub">Everything we do, built around your needs.</p>
     </div>
-    <div class="services-track-wrap" id="track">
-      <div class="services-track">
-        <div class="service-card">
-          <div class="card-img">Image 300 × 180px</div>
-          <span class="card-tag">Service</span>
+    <div class="feature-list">
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <div class="feature-body">
+          <div class="feature-meta"><span class="feature-tag">Service</span></div>
           <h3>Service One</h3>
-          <p>A short description of this service goes here. Keep it clear and focused on the value.</p>
-          <a class="card-link" href="#">Learn more →</a>
-        </div>
-        <div class="service-card">
-          <div class="card-img">Image 300 × 180px</div>
-          <span class="card-tag">Product</span>
-          <h3>Product Two</h3>
-          <p>Highlight what makes this product different. Think about the customer's main problem.</p>
-          <a class="card-link" href="#">Learn more →</a>
-        </div>
-        <div class="service-card">
-          <div class="card-img">Image 300 × 180px</div>
-          <span class="card-tag">Service</span>
-          <h3>Service Three</h3>
-          <p>Describe the outcome or transformation a customer gets from using this service.</p>
-          <a class="card-link" href="#">Learn more →</a>
-        </div>
-        <div class="service-card">
-          <div class="card-img">Image 300 × 180px</div>
-          <span class="card-tag">Product</span>
-          <h3>Product Four</h3>
-          <p>What unique advantage does this product offer? Keep it short and benefit-driven.</p>
-          <a class="card-link" href="#">Learn more →</a>
-        </div>
-        <div class="service-card">
-          <div class="card-img">Image 300 × 180px</div>
-          <span class="card-tag">Service</span>
-          <h3>Service Five</h3>
-          <p>Sum up this service in a couple of sentences. Focus on what the customer walks away with.</p>
-          <a class="card-link" href="#">Learn more →</a>
+          <p>A short description of this service goes here. Keep it clear and focused on the value it delivers to the customer.</p>
+          <a class="feature-link" href="service-one.html">Learn more →</a>
         </div>
       </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="feature-body">
+          <div class="feature-meta"><span class="feature-tag">Service</span></div>
+          <h3>Service Two</h3>
+          <p>Highlight what makes this service different. Think about the customer's main problem and how this solves it.</p>
+          <a class="feature-link" href="service-two.html">Learn more →</a>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="feature-body">
+          <div class="feature-meta"><span class="feature-tag">Service</span></div>
+          <h3>Service Three</h3>
+          <p>Describe the outcome or transformation a customer gets. Focus on what they walk away with.</p>
+          <a class="feature-link" href="service-three.html">Learn more →</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -206,6 +208,50 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-header">
+        <div class="section-label">Questions</div>
+        <div class="section-title">Frequently asked</div>
+        <p class="section-sub">Everything you need to know before getting started.</p>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">What exactly does Placeholder do?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Placeholder is a two-person team based in Wellington, New Zealand. We help businesses solve real problems through focused, well-executed services. We keep our client list small so every engagement gets our full attention.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">How do I know if we're a good fit?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">The best way to find out is to get in touch. We'll have a short conversation about what you're trying to achieve and give you an honest answer about whether we can help. No hard sell, no obligation.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">How much does it cost?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Pricing depends on the scope and nature of the engagement. We provide clear, upfront pricing after a discovery conversation — no hidden fees, no surprise invoices. Most projects are fixed-price so you always know what you're committing to.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">How long does a typical project take?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">It varies by service and scope. Some engagements are complete in 2–3 weeks, others run longer. We'll give you a specific timeline during scoping so you can plan accordingly.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Do you work with clients outside New Zealand?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Yes — we work with clients across New Zealand, Australia, and beyond. Most of our work is done remotely, and we're experienced at collaborating across time zones.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">What happens after the project is done?<span class="faq-icon">+</span></button>
+          <div class="faq-answer">Every engagement includes a handover period where we make sure you're fully set up and confident. We also offer ongoing support packages for clients who want continued access to our team after delivery.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-top">
@@ -216,19 +262,17 @@
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="404.html">About Us</a></li>
-          <li><a href="404.html">Our Team</a></li>
-          <li><a href="404.html">Careers</a></li>
-          <li><a href="404.html">Press</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#team">Our Team</a></li>
+          <li><a href="about.html#careers">Careers</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="404.html">Service One</a></li>
-          <li><a href="404.html">Service Two</a></li>
-          <li><a href="404.html">Product One</a></li>
-          <li><a href="404.html">All Services</a></li>
+          <li><a href="service-one.html">Service One</a></li>
+          <li><a href="service-two.html">Service Two</a></li>
+          <li><a href="service-three.html">Service Three</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -327,18 +371,177 @@
       cookieBanner.classList.add('hidden');
     });
 
-    // ── DRAG TO SCROLL ──
-    const track = document.getElementById('track');
-    let isDown = false, startX, scrollLeft;
-    track.addEventListener('mousedown', e => {
-      isDown = true; track.style.cursor = 'grabbing';
-      startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft;
-    });
-    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
-    track.addEventListener('mouseup',    () => { isDown = false; track.style.cursor = 'grab'; });
-    track.addEventListener('mousemove',  e => {
-      if (!isDown) return; e.preventDefault();
-      track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX) * 1.4;
+
+    // ── BUBBLE CANVAS ──
+    (function() {
+      const canvas = document.getElementById('bubbleCanvas');
+      const panel  = document.getElementById('bubblePanel');
+      if (!canvas || !panel) return;
+      const ctx = canvas.getContext('2d');
+
+      const RADIUS    = 10;   // resting radius
+      const SPACING   = 26;   // grid spacing
+      const MAX_GROW  = 26;   // max radius of hovered bubble
+      const PUSH_R    = 85;   // repulsion radius for neighbours
+      const STIFFNESS = 0.16;
+      const DAMPING   = 0.70;
+
+      let bubbles = [];
+      let mouse = { x: -999, y: -999, inside: false };
+      let closestIdx = -1;
+
+      function randomRainbow() {
+        const hue = Math.floor(Math.random() * 360);
+        return `hsl(${hue}, 90%, 60%)`;
+      }
+
+      function resize() {
+        canvas.width  = panel.offsetWidth;
+        canvas.height = panel.offsetHeight || 520;
+        buildGrid();
+      }
+
+      function buildGrid() {
+        bubbles = [];
+        const cols = Math.floor((canvas.width  - SPACING) / SPACING) + 1;
+        const rows = Math.floor((canvas.height - SPACING) / SPACING) + 1;
+        const offX = (canvas.width  - (cols - 1) * SPACING) / 2;
+        const offY = (canvas.height - (rows - 1) * SPACING) / 2;
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const ox = offX + c * SPACING;
+            const oy = offY + r * SPACING;
+            bubbles.push({
+              ox, oy, x: ox, y: oy,
+              vx: 0, vy: 0,
+              radius: RADIUS,
+              color: null,       // rainbow color (only hovered bubble)
+              colorT: 0,         // 0 = rest, 1 = rainbow
+            });
+          }
+        }
+        closestIdx = -1;
+      }
+
+      function getRestColor() {
+        return document.documentElement.getAttribute('data-theme') === 'dark'
+          ? '#2e2e2e' : '#e2e0dc';
+      }
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const restColor = getRestColor();
+
+        // Find which bubble the cursor is closest to (its origin)
+        let newClosest = -1;
+        let minDist = Infinity;
+        if (mouse.inside) {
+          for (let i = 0; i < bubbles.length; i++) {
+            const b = bubbles[i];
+            const d = Math.hypot(mouse.x - b.ox, mouse.y - b.oy);
+            if (d < minDist) { minDist = d; newClosest = i; }
+          }
+        }
+
+        // Assign a new random rainbow colour whenever we land on a new bubble
+        if (newClosest !== closestIdx) {
+          if (newClosest !== -1) bubbles[newClosest].color = randomRainbow();
+          closestIdx = newClosest;
+        }
+
+        for (let i = 0; i < bubbles.length; i++) {
+          const b = bubbles[i];
+          const isHovered = (i === closestIdx);
+
+          if (isHovered) {
+            // Hovered bubble: stay at origin, just grow
+            b.x = b.ox;
+            b.y = b.oy;
+            b.vx = 0;
+            b.vy = 0;
+            b.radius = lerp(b.radius, MAX_GROW, 0.18);
+            b.colorT  = lerp(b.colorT, 1, 0.12);
+          } else {
+            // Push away from the hovered bubble's origin
+            if (closestIdx !== -1) {
+              const hb = bubbles[closestIdx];
+              const dx = b.ox - hb.ox;
+              const dy = b.oy - hb.oy;
+              const dist = Math.hypot(dx, dy) || 0.001;
+              if (dist < PUSH_R) {
+                const force = ((PUSH_R - dist) / PUSH_R) * 5.5;
+                b.vx += (dx / dist) * force;
+                b.vy += (dy / dist) * force;
+              }
+            }
+
+            // Spring back to origin
+            b.vx += (b.ox - b.x) * STIFFNESS;
+            b.vy += (b.oy - b.y) * STIFFNESS;
+            b.vx *= DAMPING;
+            b.vy *= DAMPING;
+            b.x  += b.vx;
+            b.y  += b.vy;
+
+            b.radius = lerp(b.radius, RADIUS, 0.15);
+            b.colorT  = lerp(b.colorT, 0, 0.10);
+          }
+
+          // Draw
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, Math.max(1, b.radius), 0, Math.PI * 2);
+
+          if (b.colorT > 0.01 && b.color) {
+            // Blend between rest and rainbow
+            ctx.fillStyle = b.colorT > 0.98 ? b.color : restColor;
+            // For a smooth blend, use globalAlpha trick
+            ctx.fillStyle = restColor;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, Math.max(1, b.radius), 0, Math.PI * 2);
+            ctx.fillStyle = b.color;
+            ctx.globalAlpha = b.colorT;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          } else {
+            ctx.fillStyle = restColor;
+            ctx.fill();
+          }
+        }
+        requestAnimationFrame(loop);
+      }
+
+      canvas.addEventListener('mouseenter', () => { mouse.inside = true; });
+      canvas.addEventListener('mouseleave', () => {
+        mouse.inside = false;
+        mouse.x = -999; mouse.y = -999;
+        closestIdx = -1;
+      });
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = (e.clientX - rect.left) * (canvas.width  / rect.width);
+        mouse.y = (e.clientY - rect.top)  * (canvas.height / rect.height);
+      });
+
+      new MutationObserver(() => {}).observe(
+        document.documentElement, { attributes: true, attributeFilter: ['data-theme'] }
+      );
+
+      resize();
+      window.addEventListener('resize', resize);
+      loop();
+    })();
+
+    // ── FAQ ACCORDION ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
     });
 
     // ── FADE IN ON SCROLL ──
