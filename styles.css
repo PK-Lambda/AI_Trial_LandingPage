@@ -136,7 +136,7 @@ nav {
 /* ── HERO SPLIT ── */
 .hero {
   display: grid; grid-template-columns: 55fr 45fr;
-  min-height: 520px; border-bottom: 1px solid var(--border);
+  min-height: max(520px, 65vh); border-bottom: 1px solid var(--border);
 }
 .hero-content {
   padding: 70px 56px; display: flex; flex-direction: column;
@@ -179,7 +179,7 @@ nav {
 .hero-image {
   background: var(--bg);
   border-left: 1px solid var(--border);
-  overflow: hidden; min-height: 520px;
+  overflow: hidden; min-height: max(520px, 65vh);
   padding: 0; position: relative;
 }
 #bubbleCanvas {
