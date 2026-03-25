@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Placeholder</title>
+  <title>Placeholder — Wellington NZ | Services & Products</title>
+    <meta name="description" content="Placeholder is a two-person team based in Wellington, New Zealand. We deliver focused, high-quality services to businesses across NZ and beyond.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://placeholder.co.nz/index.html">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Placeholder — Wellington NZ">
+  <meta property="og:description" content="A two-person team delivering focused, high-quality services to businesses across New Zealand and beyond.">
+  <meta property="og:url" content="https://placeholder.co.nz/index.html">
+  <meta property="og:site_name" content="Placeholder">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Placeholder — Wellington NZ">
+  <meta name="twitter:description" content="A two-person team delivering focused, high-quality services to businesses across New Zealand and beyond.">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
 </head>
@@ -401,6 +414,8 @@
         buildGrid();
       }
 
+      let autoGlowIdxs = new Set();
+
       function buildGrid() {
         bubbles = [];
         const cols = Math.floor((canvas.width  - SPACING) / SPACING) + 1;
@@ -415,13 +430,67 @@
               ox, oy, x: ox, y: oy,
               vx: 0, vy: 0,
               radius: RADIUS,
-              color: null,       // rainbow color (only hovered bubble)
-              colorT: 0,         // 0 = rest, 1 = rainbow
+              color: null,
+              colorT: 0,        // hover colour blend
+              glowColor: null,
+              glowT: 0,         // ambient glow blend
             });
           }
         }
         closestIdx = -1;
+        autoGlowIdxs = new Set();
       }
+
+      // Auto-glow: picks 5-10 random bubbles every 2s, at least 2 grid steps apart
+      let autoGlowTimer = null;
+
+      function pickGlowBubbles() {
+        if (bubbles.length === 0) return;
+
+        // Fade out all current glows
+        autoGlowIdxs.forEach(idx => { if (bubbles[idx]) bubbles[idx].glowT = 0; });
+        autoGlowIdxs.clear();
+
+        const count = 5 + Math.floor(Math.random() * 6); // 5–10
+        const minDist = SPACING * 2.2; // at least 2 circles apart
+        const candidates = [];
+
+        let attempts = 0;
+        while (candidates.length < count && attempts < 500) {
+          attempts++;
+          const pick = Math.floor(Math.random() * bubbles.length);
+          if (pick === closestIdx) continue;
+          const pb = bubbles[pick];
+
+          // Check distance from all already chosen candidates
+          let tooClose = false;
+          for (const c of candidates) {
+            const cb = bubbles[c];
+            if (Math.hypot(pb.ox - cb.ox, pb.oy - cb.oy) < minDist) { tooClose = true; break; }
+          }
+          if (!tooClose) candidates.push(pick);
+        }
+
+        candidates.forEach(idx => {
+          autoGlowIdxs.add(idx);
+          bubbles[idx].glowColor = randomRainbow();
+          bubbles[idx].glowT = 0;
+        });
+      }
+
+      function startAutoGlow() {
+        if (autoGlowTimer) return;
+        pickGlowBubbles(); // fire immediately on start
+        autoGlowTimer = setInterval(pickGlowBubbles, 2000);
+      }
+
+      function stopAutoGlow() {
+        if (autoGlowTimer) { clearInterval(autoGlowTimer); autoGlowTimer = null; }
+        autoGlowIdxs.forEach(idx => { if (bubbles[idx]) bubbles[idx].glowT = 0; });
+        autoGlowIdxs.clear();
+      }
+
+      startAutoGlow();
 
       function getRestColor() {
         return document.documentElement.getAttribute('data-theme') === 'dark'
@@ -485,39 +554,59 @@
             b.x  += b.vx;
             b.y  += b.vy;
 
-            b.radius = lerp(b.radius, RADIUS, 0.15);
             b.colorT  = lerp(b.colorT, 0, 0.10);
           }
 
-          // Draw
+          // Animate ambient glow + size boost (handles radius for non-hovered bubbles)
+          const isAutoGlow = autoGlowIdxs.has(i);
+          if (!isHovered) {
+            if (isAutoGlow) {
+              b.glowT   = lerp(b.glowT, 1, 0.06);
+              b.radius  = lerp(b.radius, RADIUS * 1.15, 0.10);
+            } else {
+              b.glowT   = lerp(b.glowT, 0, 0.04);
+              b.radius  = lerp(b.radius, RADIUS, 0.10);
+            }
+          }
+
+          // Draw base
           ctx.beginPath();
           ctx.arc(b.x, b.y, Math.max(1, b.radius), 0, Math.PI * 2);
+          ctx.fillStyle = restColor;
+          ctx.fill();
 
+          // Draw hover colour overlay
           if (b.colorT > 0.01 && b.color) {
-            // Blend between rest and rainbow
-            ctx.fillStyle = b.colorT > 0.98 ? b.color : restColor;
-            // For a smooth blend, use globalAlpha trick
-            ctx.fillStyle = restColor;
-            ctx.fill();
             ctx.beginPath();
             ctx.arc(b.x, b.y, Math.max(1, b.radius), 0, Math.PI * 2);
             ctx.fillStyle = b.color;
             ctx.globalAlpha = b.colorT;
             ctx.fill();
             ctx.globalAlpha = 1;
-          } else {
-            ctx.fillStyle = restColor;
+          }
+
+          // Draw ambient glow overlay (independent of hover)
+          if (b.glowT > 0.01 && b.glowColor) {
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, Math.max(1, b.radius), 0, Math.PI * 2);
+            ctx.fillStyle = b.glowColor;
+            ctx.globalAlpha = b.glowT * 0.85;
             ctx.fill();
+            ctx.globalAlpha = 1;
           }
         }
         requestAnimationFrame(loop);
       }
 
-      canvas.addEventListener('mouseenter', () => { mouse.inside = true; });
+      canvas.addEventListener('mouseenter', () => {
+        mouse.inside = true;
+        stopAutoGlow();
+      });
       canvas.addEventListener('mouseleave', () => {
         mouse.inside = false;
         mouse.x = -999; mouse.y = -999;
         closestIdx = -1;
+        startAutoGlow();
       });
       canvas.addEventListener('mousemove', e => {
         const rect = canvas.getBoundingClientRect();
@@ -534,6 +623,7 @@
       loop();
     })();
 
+    
     // ── FAQ ACCORDION ──
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
